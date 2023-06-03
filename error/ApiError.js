@@ -5,6 +5,7 @@ class ApiError extends Error {
     this.message = message;
   }
   static badRequest(message) {
+    console.log(`log`);
     return new ApiError(404, message);
   }
 
