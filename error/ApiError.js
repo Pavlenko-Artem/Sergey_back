@@ -9,6 +9,7 @@ class ApiError extends Error {
   }
 
   static internal(message) {
+    console.log(`main`);
     return new ApiError(500, message);
   }
 
