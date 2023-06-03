@@ -22,7 +22,6 @@ module.exports = function (role) {
       req.user = decoded;
       next();
     } catch (e) {
-      console.log('token');
       next(ApiError.unauthorized('Не авторизован'));
     }
   };
