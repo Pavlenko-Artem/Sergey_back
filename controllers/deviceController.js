@@ -9,7 +9,6 @@ class DeviceController {
       let { name, price, brandId, typeId, info } = req.body;
       const { img } = req.files;
       let fileName = uuid.v4() + '.jpg';
-      img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       const device = await Device.create({
         name,
@@ -18,6 +17,8 @@ class DeviceController {
         typeId,
         img: fileName
       });
+
+      img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       if (info) {
         info = jSON.parse(info);
@@ -83,6 +84,16 @@ class DeviceController {
     });
 
     return res.json(device);
+  }
+
+  async deleteOne(req, res) {
+    const { id } = req.body;
+
+    const device = await Device.destroy({
+      where: { id }
+    });
+
+    return res.json({ message: `Продукт успешно удалён` });
   }
 }
 
